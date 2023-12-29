@@ -1,0 +1,154 @@
+[
+  {
+    "model": "catalog.category",
+    "pk": 1,
+    "fields": {
+      "name": "Соки",
+      "description": "длительного хранения"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 2,
+    "fields": {
+      "name": "Бакалея",
+      "description": "Длительного хранения"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 3,
+    "fields": {
+      "name": "Мясо",
+      "description": "Скоропортящееся"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 4,
+    "fields": {
+      "name": "Молочные продукты",
+      "description": "Скоропортящееся"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 5,
+    "fields": {
+      "name": "Рыба",
+      "description": "Скоропортящееся"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 6,
+    "fields": {
+      "name": "Хлебобулочные изделия",
+      "description": "Средний срок хранения"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 1,
+    "fields": {
+      "name": "Мука ржаная",
+      "description": "упаковка 1 кг",
+      "item_pic": "",
+      "category": 2,
+      "item_price": "100.00",
+      "created_date": "2023-12-24",
+      "last_edited_date": "2023-12-29"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 2,
+    "fields": {
+      "name": "Мука пшеничная",
+      "description": "упаковка 1 кг",
+      "item_pic": "",
+      "category": 2,
+      "item_price": "90.00",
+      "created_date": "2023-12-18",
+      "last_edited_date": "2023-12-29"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 3,
+    "fields": {
+      "name": "Кефир",
+      "description": "тетрапак 1 л",
+      "item_pic": "",
+      "category": 4,
+      "item_price": "149.00",
+      "created_date": "2023-12-28",
+      "last_edited_date": "2023-12-29"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 4,
+    "fields": {
+      "name": "Свиная вырезка",
+      "description": "Ваккумная упаковка по 500 гр",
+      "item_pic": "",
+      "category": 3,
+      "item_price": "500.00",
+      "created_date": "2023-12-29",
+      "last_edited_date": "2023-12-29"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 5,
+    "fields": {
+      "name": "Яблочный сок",
+      "description": "Стекло, 500 мл",
+      "item_pic": "",
+      "category": 1,
+      "item_price": "120.00",
+      "created_date": "2023-12-22",
+      "last_edited_date": "2023-12-29"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 6,
+    "fields": {
+      "name": "Сметана",
+      "description": "250 гр",
+      "item_pic": "",
+      "category": 4,
+      "item_price": "80.00",
+      "created_date": "2023-12-20",
+      "last_edited_date": "2023-12-27"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 7,
+    "fields": {
+      "name": "Свиные ребра",
+      "description": "Ваккумная упаковка по 1 кг",
+      "item_pic": "",
+      "category": 3,
+      "item_price": "1000.00",
+      "created_date": "2023-12-29",
+      "last_edited_date": "2023-12-29"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 8,
+    "fields": {
+      "name": "Томатный сок",
+      "description": "Стекло, 750 мл",
+      "item_pic": "",
+      "category": 1,
+      "item_price": "90.00",
+      "created_date": "2023-12-22",
+      "last_edited_date": "2023-12-28"
+    }
+  }
+]
