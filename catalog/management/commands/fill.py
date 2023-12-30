@@ -1,17 +1,12 @@
 from django.core.management import BaseCommand
 from django.db import connection
-
 from catalog.models import Category, Product
-
-
-# class Products:
-#     pass
 
 
 class Command(BaseCommand):
 
     def handle(self, *args, **options):
-
+        #Позиции категорий для внесения в БД
         categories = [
             {'name': 'Соки', 'description': 'Длительного хранения'},
             {'name': 'Бакалея', 'description': 'Длительного хранения'},
@@ -20,19 +15,22 @@ class Command(BaseCommand):
             {'name': 'Хлебобулочные изделия', 'description': 'Средний срок хранения'}
         ]
 
-        Category.objects.all().delete()
 
-        with connection.cursor() as cursor:
+        Category.objects.all().delete()  #Обнуление базы категорий
+
+
+        with connection.cursor() as cursor: #Переопределение нумерации в базе категорий с 1
             cursor.execute("ALTER SEQUENCE catalog_category_id_seq RESTART WITH 1")
 
-        categories_to_create = []
+
+        categories_to_create = []  #Формирование списка категорий для внесения в базу
         for category in categories:
             categories_to_create.append(Category(**category))
 
-        # Добавление категорий в базу данных
-        Category.objects.bulk_create(categories_to_create)
 
-        # Список продуктов для добавления в БД
+        Category.objects.bulk_create(categories_to_create)    # Внесение категорий в базу данных
+
+        # Позиции продуктов для внесения в БД
         products = [
             {'name': 'Cушки', 'description': 'Пакет 400 гр',
              'category': categories_to_create[4], 'item_price': '28'},
@@ -54,38 +52,17 @@ class Command(BaseCommand):
         ]
 
 
-        Product.objects.all().delete()
+        Product.objects.all().delete()     #Обнуление базы продуктов
 
-        with connection.cursor() as cursor:
+        with connection.cursor() as cursor:    #Переопределение нумерации в базе продуктов с 1
             cursor.execute("ALTER SEQUENCE catalog_product_id_seq RESTART WITH 1")
 
-        # Список экземпляров класса Product
-        products_to_create = []
+
+        products_to_create = []    #Формирование списка продуктов для внесения в базу
         for product in products:
             products_to_create.append(Product(**product))
 
-        # Добавление продуктов в базу данных
-        Product.objects.bulk_create(products_to_create)
+
+        Product.objects.bulk_create(products_to_create)  # Внесение продуктов в базу данных
 
 
-# from django.core.management import BaseCommand
-#
-# from catalog.models import Product, Category
-#
-#
-# class Command(BaseCommand):
-#     def handle(self, *args, **options):
-#         product_list = [
-#             {'name': 'Cушки', 'category': 'Хлебобулочные изделия', 'item_price': '28'},
-#             {'name': 'Йогурт', 'category': 'Молочные изделия', 'item_price': '50'},
-#             {'name': 'Кефир', 'category': 'Молочные изделия', 'item_price': '120'},
-#             {'name': 'Мука ржаная', 'category': 'Бакалея', 'item_price': '100'}
-#         ]
-#
-#         products_to_create = []
-#         for product_item in product_list:
-#             products_to_create.append(
-#                 Product(**product_item)
-#             )
-#
-#         Product.objects.bulk_create(products_to_create)
