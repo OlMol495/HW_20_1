@@ -36,3 +36,22 @@ class Product(models.Model):
         verbose_name = 'товар'  # Настройка для наименования одного объекта
         verbose_name_plural = 'товары'  # Настройка для наименования набора объектов
         ordering = ('name', 'item_price')
+
+
+class Contact(models.Model):
+    first_name = models.CharField(max_length=200, verbose_name='Имя')
+    last_name = models.CharField(max_length=200, verbose_name='Фамилия', **NULLABLE)
+    email = models.CharField(max_length=200, verbose_name='Имейл', **NULLABLE)
+    phone = models.CharField(max_length=15, verbose_name='Телефон', **NULLABLE)
+    notes = models.TextField(**NULLABLE, verbose_name='Дополнительная информация')
+
+
+    def __str__(self):
+        # Строковое отображение объекта
+        return f'{self.first_name} {self.last_name}: {self.email}, {self.phone} '
+
+    class Meta:
+        verbose_name = 'Контакты'
+        verbose_name_plural = 'Контакты'
+        ordering = ('last_name', )
+
