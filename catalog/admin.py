@@ -15,8 +15,10 @@ class CategoryAdmin(admin.ModelAdmin):
 
 @admin.register(Contact)
 class ContactAdmin(admin.ModelAdmin):
-    list_display = ('first_name', 'last_name', 'email', 'phone',)
-    list_filter = ('last_name', 'first_name')
-    search_fields = ('first_name', 'last_name', 'email')
+    list_display = ('name', 'phone', 'email', 'address', 'ind_number',)
+    list_filter = ('name', 'address')
+    search_fields = ('name', 'email')
+
+
 
 

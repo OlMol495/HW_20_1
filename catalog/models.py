@@ -40,19 +40,16 @@ class Product(models.Model):
 
 
 class Contact(models.Model):
-    first_name = models.CharField(max_length=200, verbose_name='Имя')
-    last_name = models.CharField(max_length=200, verbose_name='Фамилия', **NULLABLE)
+    name = models.CharField(max_length=40, verbose_name="Название компании", **NULLABLE)
+    phone = models.CharField(max_length=20, verbose_name='Телефон', **NULLABLE)
     email = models.CharField(max_length=200, verbose_name='Имейл', **NULLABLE)
-    phone = models.CharField(max_length=15, verbose_name='Телефон', **NULLABLE)
-    notes = models.TextField(**NULLABLE, verbose_name='Дополнительная информация')
-
+    address = models.TextField(verbose_name='Адрес', **NULLABLE)
+    ind_number = models.CharField(max_length=30, verbose_name='ИНН', **NULLABLE)
 
     def __str__(self):
         # Строковое отображение объекта
-        return f'{self.first_name} {self.last_name}: {self.email}, {self.phone} '
+        return f"{self.name}: {self.phone}, {self.email}, {self.address}, {self.ind_number}"
 
     class Meta:
-        verbose_name = 'Контакты'
+        verbose_name = 'Контакт'
         verbose_name_plural = 'Контакты'
-        ordering = ('last_name', )
-
