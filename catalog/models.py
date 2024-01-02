@@ -18,7 +18,6 @@ class Category(models.Model):
         ordering = ('name',)
 
 
-
 class Product(models.Model):
     name = models.CharField(max_length=150, verbose_name='Наименование товара')
     description = models.TextField(**NULLABLE, verbose_name='Описание товара')
@@ -27,7 +26,6 @@ class Product(models.Model):
     item_price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='Цена за единицу товара')
     created_date = models.DateField(auto_now_add=True, verbose_name='Дата внесения товара в базу', **NULLABLE)
     last_edited_date = models.DateField(auto_now=True, verbose_name='Дата последнего изменения', **NULLABLE)
-
 
     def __str__(self):
         # Строковое отображение объекта
