@@ -1,15 +1,15 @@
 from django.shortcuts import render
 
-from catalog.models import Product, Contact
+from catalog.models import Product, Contact, Category
 
 
 def home(request):
-    five_products = Product.objects.all().order_by('-last_edited_date')[:5]
-    product_content = {
-        'prod_to_display': five_products,
+    all_products = Product.objects.all()
+    content = {
+        'prod_to_display': all_products,
         'title': 'Best Store Ever'
     }
-    return render(request, "catalog/home.html", product_content)
+    return render(request, "catalog/home.html", content)
 
 
 def contacts(request):
@@ -24,3 +24,13 @@ def contacts(request):
         message = request.POST.get("message")
         print(f"{name} ({phone}): {message}")
     return render(request, "catalog/contacts.html", info_content)
+
+
+def product_detail(request, pk):
+    one_product = Product.objects.filter(id=pk)
+    content = {
+        'prod_to_display': one_product,
+        'title': 'Детальная информация о товаре'
+    }
+    return render(request, "catalog/product_detail.html", content)
+
