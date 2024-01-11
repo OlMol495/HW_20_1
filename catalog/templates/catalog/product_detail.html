@@ -8,11 +8,10 @@
           <div class="card-header">
             <h4 class="my-0 font-weight-normal">{{ prod.name }}</h4>
           </div>
-          <img class="card-img-top"
-               src="{{ prod.item_pic|mymedia }}"
-               width="10"
-               height="300"
-               alt="Card image cap">
+          <div class="col-6">
+          <img src="{{ prod.item_pic|mymedia }}" />
+          </div>
+
           <div class="card-body">
             <h1 class="card-title pricing-card-title">{{ prod.item_price }} </h1>
             <ul class="list-unstyled mt-3 mb-4">
