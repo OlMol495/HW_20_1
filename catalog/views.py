@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from django.views.generic import TemplateView, ListView, DetailView
+from django.urls import reverse_lazy
+from django.views.generic import TemplateView, ListView, DetailView, CreateView
 
 from catalog.models import Product, Contact, Category
 
@@ -21,6 +22,13 @@ class ProductListView(ListView):
 class ProductDetailView(DetailView):
     model = Product
     extra_context = {'title': 'Детальная информация о товаре'}
+
+
+class ProductCreateView(CreateView):
+    model = Product
+    fields = ['name', 'description', 'item_price', 'category', 'item_pic',]
+    success_url = reverse_lazy('catalog:catalog')
+
 
 
 def contacts(request):

@@ -1,0 +1,32 @@
+{% extends 'catalog/base.html' %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-6">
+            <div class="card">
+                <div class="card-header">
+                    {% if object %}
+                    <h1>Редактировать сведения о продукте</h1>
+                    {% else %}
+                    <h1>Добавление продукта</h1>
+                    {% endif %}
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button type="submit" class="btn btn-success">
+                            {% if object %}
+                                Обновить
+                            {% else %}
+                                Создать
+                            {% endif %}
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
