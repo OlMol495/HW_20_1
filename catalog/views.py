@@ -1,15 +1,26 @@
 from django.shortcuts import render
+from django.views.generic import TemplateView, ListView, DetailView
 
 from catalog.models import Product, Contact, Category
 
 
-def home(request):
-    all_products = Product.objects.all()
-    content = {
-        'prod_to_display': all_products,
-        'title': 'Best Store Ever'
-    }
-    return render(request, "catalog/home.html", content)
+class HomeTemplateView(TemplateView):
+    template_name = 'catalog/home.html'
+    extra_context = {'title': 'Best Store Ever'}
+
+    def get_context_data(self, **kwargs):
+        context_data = super().get_context_data(**kwargs)
+        context_data['object_list'] = Product.objects.all()[:3]
+        return context_data
+
+class ProductListView(ListView):
+    model = Product
+    extra_context = {'title': 'Каталог продуктов'}
+
+
+class ProductDetailView(DetailView):
+    model = Product
+    extra_context = {'title': 'Детальная информация о товаре'}
 
 
 def contacts(request):
@@ -26,11 +37,5 @@ def contacts(request):
     return render(request, "catalog/contacts.html", info_content)
 
 
-def product_detail(request, pk):
-    one_product = Product.objects.filter(id=pk)
-    content = {
-        'prod_to_display': one_product,
-        'title': 'Детальная информация о товаре'
-    }
-    return render(request, "catalog/product_detail.html", content)
+
 
