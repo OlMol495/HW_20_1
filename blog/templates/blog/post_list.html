@@ -1,8 +1,15 @@
 {% extends 'catalog/base.html' %}
 {% block content %}
-<div class="col-12 mb-5">
-    <a class="btn btn-outline-primary" href="#">Добавить пост</a>
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+    <h1 class="display-4">Наш блог</h1>
+    <p class="lead">BestStoreEver - это самый удобный сервис по заказу продуктов онлайн</p>
 </div>
+<div class="container">
+    <div class="row text-center">
+        <div class="col-12 mb-5">
+   <a class="btn btn-outline-primary" href="{% url 'blog:create' %}">Добавить пост</a>
+</div>
+<div class="row"></div>
 {% for object in object_list %}
 <div class="col-md-4">
     <div class="card mb-4 box-shadow">
@@ -24,4 +31,6 @@
     </div>
 </div>
 {% endfor %}
+<div class="col-12 mb-5">
+
 {% endblock %}
