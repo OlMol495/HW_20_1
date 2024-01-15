@@ -1,10 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'catalog/base.html' %}
+{% load my_tags %}
+{% block content %}
+<div class="col-12">
+    <div class="row">
 
-</body>
-</html>
+        <div class="col-6">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">
+                        Пост "{{ object.title }}" ({{ object.slug }})
+                    </h5>
+                </div>
+                <div class="col-6">
+                <img src="{{ object.preview_image|mymedia }}" />
+                </div>
+                <div class="card-body">
+                    <p>{{ object.text }}</p>
+                </div>
+                <div class="card-footer">
+                    <p>
+                        <p>Создан: {{ object.created }}</p>
+                        <p>Обновлен: {{ object.updated }}</p>
+                        <p>Просмотры {{ object.views }}</p>
+                    </p>
+                    <a href="{% url 'blog:update' object.pk %}"
+
+                       class="btn btn-sm btn-warning">EDIT</a>
+                    <a href="{% url 'blog:delete' object.pk %}"
+                       class="btn btn-sm btn-danger float-right">DELETE</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
