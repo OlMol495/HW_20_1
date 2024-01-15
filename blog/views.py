@@ -1,12 +1,12 @@
 from django.urls import reverse_lazy, reverse
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from pytils.translit import slugify
-
 from blog.models import Post
 
 
 class PostListView(ListView):
     model = Post
+    paginate_by = 3
 
     def get_queryset(self):
         queryset = super().get_queryset()
