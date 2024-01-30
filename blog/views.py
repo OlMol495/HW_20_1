@@ -1,7 +1,9 @@
+from django.core.mail import send_mail
 from django.urls import reverse_lazy, reverse
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from pytils.translit import slugify
 from blog.models import Post
+from config.settings import EMAIL_HOST_USER
 
 
 class PostListView(ListView):
@@ -36,6 +38,9 @@ class PostDetailView(DetailView):
         self.object = super().get_object(queryset)
         self.object.views += 1
         self.object.save()
+        if self.object.views == 100:
+            send_mail(subject="Hi there!", message="You got 100 views!", from_email=EMAIL_HOST_USER,
+                      recipient_list=[EMAIL_HOST_USER])
         return self.object
 
 class PostUpdateView(UpdateView):
