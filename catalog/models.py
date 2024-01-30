@@ -1,4 +1,6 @@
 from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 from django.utils import timezone
 
 NULLABLE = {'blank': True, 'null': True}
@@ -34,7 +36,29 @@ class Product(models.Model):
     class Meta:
         verbose_name = 'товар'  # Настройка для наименования одного объекта
         verbose_name_plural = 'товары'  # Настройка для наименования набора объектов
-        ordering = ('name', 'item_price')
+        ordering = ('-last_edited_date', 'name',)
+
+
+class Version(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name='Наименование товара')
+    version_number = models.CharField(max_length=20, verbose_name='Номер версии')
+    name = models.CharField(max_length=150, verbose_name='Название версии')
+    is_active = models.BooleanField(default=False, verbose_name='Активна')
+
+    def __str__(self):
+        return f'{self.name}'
+
+    class Meta:
+        """Класс отображения метаданных"""
+        verbose_name = 'Версия'
+        verbose_name_plural = 'Версии'
+
+
+@receiver(post_save, sender=Version)
+def set_active_version(sender, instance, **kwargs):
+    """При установке флага версии в режим 'активна' версии, которые были активны до этого перестают быть активными"""
+    if instance.is_active:
+        Version.objects.filter(product=instance.product).exclude(pk=instance.pk).update(is_active=False)
 
 
 class Contact(models.Model):
@@ -45,8 +69,7 @@ class Contact(models.Model):
     ind_number = models.CharField(max_length=30, verbose_name='ИНН', **NULLABLE)
 
     def __str__(self):
-        # Строковое отображение объекта
-        return f"{self.name}: {self.phone}, {self.email}, {self.address}, {self.ind_number}"
+       return f"{self.name}: {self.phone}, {self.email}, {self.address}, {self.ind_number}"
 
     class Meta:
         verbose_name = 'Контакт'

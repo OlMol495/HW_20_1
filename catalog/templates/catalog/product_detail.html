@@ -6,6 +6,11 @@
         <div class="card mb-4 box-shadow">
           <div class="card-header">
             <h4 class="my-0 font-weight-normal">{{ object.name }}</h4>
+            {% for version in product.version_set.all %}
+            {% if version.is_active %}
+             <p>Версия: {{version.name}} {{version.version_number}}</p>
+             {% endif %}
+             {% endfor %}
           </div>
           <div class="col-6">
           <img src="{{ object.item_pic|mymedia }}" />

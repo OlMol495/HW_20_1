@@ -15,6 +15,11 @@
             <div class="card mb-4 box-shadow">
                 <div class="card-header">
                     <h4 class="my-0 font-weight-normal">{{object.name}}</h4>
+                    {% for version in product.version_set.all %}
+                    {% if version.is_active %}
+                    <p>Версия: {{version.name}} {{version.version_number}}</p>
+                    {% endif %}
+                    {% endfor %}
                 </div>
                 <div class="card-body">
                     <h1 class="card-title pricing-card-title">{{object.item_price}}</h1>
@@ -22,12 +27,17 @@
                         <li>- {{object.category}}</li>
                         <li>- {{object.description|truncatechars:10 }}</li>
                     </ul>
-                    <a href="{% url 'catalog:product_detail' object.pk %}" type="button"
-                       class="btn btn-lg btn-block btn-outline-primary">Купить</a>
+
+                            <a href="{% url 'catalog:product_detail' object.pk %}" type="button"
+                               class="btn btn-lg btn-block btn-outline-primary">Детали</a>
+                            <a href="{% url 'catalog:product_update' object.pk %}" type="button"
+                               class="btn btn-lg btn-block btn-outline-warning">Редактировать</a>
+
                 </div>
             </div>
         </div>
         {% endfor %}
     </div>
 </div>
+{% include 'blog/pagination.html' with page=page_obj %}
 {% endblock %}

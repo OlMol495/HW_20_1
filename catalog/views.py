@@ -1,8 +1,11 @@
+from django.db import transaction
+from django.forms import inlineformset_factory
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views.generic import TemplateView, ListView, DetailView, CreateView
+from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView
 
-from catalog.models import Product, Contact, Category
+from catalog.forms import ProductForm, VersionForm
+from catalog.models import Product, Contact, Category, Version
 
 
 class HomeTemplateView(TemplateView):
@@ -17,6 +20,7 @@ class HomeTemplateView(TemplateView):
 class ProductListView(ListView):
     model = Product
     extra_context = {'title': 'Каталог продуктов'}
+    paginate_by = 4
 
 
 class ProductDetailView(DetailView):
@@ -26,8 +30,54 @@ class ProductDetailView(DetailView):
 
 class ProductCreateView(CreateView):
     model = Product
-    fields = ['name', 'description', 'item_price', 'category', 'item_pic',]
+    form_class = ProductForm
     success_url = reverse_lazy('catalog:catalog')
+
+    def form_valid(self, form):
+        formset = self.get_context_data()['formset']
+        if formset is None:
+            return super().form_valid(form)
+        with transaction.atomic():
+            if form.is_valid():
+                self.object = form.save()
+                if formset.is_valid():
+                    formset.instance = self.object
+                    formset.save()
+                else:
+                    return self.form_invalid(form)
+
+        return super().form_valid(form)
+
+
+
+class ProductUpdateView(UpdateView):
+    model = Product
+    form_class = ProductForm
+    success_url = reverse_lazy('catalog:catalog')
+
+    def get_context_data(self, **kwargs):
+        context_data = super().get_context_data(**kwargs)
+        VersionFormset = inlineformset_factory(Product, Version, form=VersionForm, extra=1)
+        if self.request.method == 'POST':
+            context_data['formset'] = VersionFormset(self.request.POST, instance=self.object)
+        else:
+            context_data['formset'] = VersionFormset(instance=self.object)
+        return context_data
+
+    def form_valid(self, form):
+        formset = self.get_context_data()['formset']
+        if formset is None:
+            return super().form_valid(form)
+        with transaction.atomic():
+            if form.is_valid():
+                self.object = form.save()
+                if formset.is_valid():
+                    formset.instance = self.object
+                    formset.save()
+                else:
+                    return self.form_invalid(form)
+
+        return super().form_valid(form)
 
 
 
