@@ -10,6 +10,7 @@ class User(AbstractUser):
     phone = models.CharField(max_length=25, verbose_name='Телефон', **NULLABLE)
     avatar = models.ImageField(upload_to='users/', verbose_name='Аватар', **NULLABLE)
     country = models.CharField(max_length=50, verbose_name='Страна', **NULLABLE)
+    email_confirmed = models.BooleanField(default=False)
 
 
     USERNAME_FIELD = "email"

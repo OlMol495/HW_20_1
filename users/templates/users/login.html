@@ -17,7 +17,7 @@
                         {% csrf_token %}
                         {{ form.as_p }}
                         <button type="submit" class="btn btn-primary">Войти</button>
-                        <p>Забыли пароль? <a href="{% url 'users:password_reset' %}">Восстановить пароль</a></p>
+                        <p>Забыли пароль? <a href="{% url 'users:forgot_password' %}">Восстановить пароль</a></p>
                     </div>
                     <div class="card-footer"></div>
                 </div>
