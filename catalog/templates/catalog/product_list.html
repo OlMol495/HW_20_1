@@ -28,10 +28,10 @@
                         <li>- {{object.description|truncatechars:10 }}</li>
                     </ul>
 
-                            <a href="{% url 'catalog:product_detail' object.pk %}" type="button"
-                               class="btn btn-lg btn-block btn-outline-primary">Детали</a>
-                            <a href="{% url 'catalog:product_update' object.pk %}" type="button"
-                               class="btn btn-lg btn-block btn-outline-warning">Редактировать</a>
+                    <a href="{% url 'catalog:product_detail' object.pk %}" type="button"
+                       class="btn btn-lg btn-block btn-outline-primary">Детали</a>
+                    <a href="{% url 'catalog:product_update' object.pk %}" type="button"
+                       class="btn btn-lg btn-block btn-outline-warning">Редактировать</a>
 
                 </div>
             </div>

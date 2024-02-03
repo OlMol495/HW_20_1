@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
@@ -28,6 +29,7 @@ class Product(models.Model):
     item_price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='Цена за единицу товара')
     created_date = models.DateField(auto_now_add=True, verbose_name='Дата внесения товара в базу', **NULLABLE)
     last_edited_date = models.DateField(auto_now=True, verbose_name='Дата последнего изменения', **NULLABLE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, **NULLABLE, verbose_name='автор записи')
 
     def __str__(self):
         # Строковое отображение объекта
@@ -69,7 +71,7 @@ class Contact(models.Model):
     ind_number = models.CharField(max_length=30, verbose_name='ИНН', **NULLABLE)
 
     def __str__(self):
-       return f"{self.name}: {self.phone}, {self.email}, {self.address}, {self.ind_number}"
+        return f"{self.name}: {self.phone}, {self.email}, {self.address}, {self.ind_number}"
 
     class Meta:
         verbose_name = 'Контакт'

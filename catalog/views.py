@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db import transaction
 from django.forms import inlineformset_factory
 from django.shortcuts import render
@@ -17,6 +18,7 @@ class HomeTemplateView(TemplateView):
         context_data['object_list'] = Product.objects.all()[:3]
         return context_data
 
+
 class ProductListView(ListView):
     model = Product
     extra_context = {'title': 'Каталог продуктов'}
@@ -28,29 +30,20 @@ class ProductDetailView(DetailView):
     extra_context = {'title': 'Детальная информация о товаре'}
 
 
-class ProductCreateView(CreateView):
+class ProductCreateView(LoginRequiredMixin, CreateView):
     model = Product
     form_class = ProductForm
     success_url = reverse_lazy('catalog:catalog')
 
     def form_valid(self, form):
-        formset = self.get_context_data()['formset']
-        if formset is None:
-            return super().form_valid(form)
-        with transaction.atomic():
-            if form.is_valid():
-                self.object = form.save()
-                if formset.is_valid():
-                    formset.instance = self.object
-                    formset.save()
-                else:
-                    return self.form_invalid(form)
+        self.object = form.save()
+        self.object.user = self.request.user
+        self.object.save()
 
         return super().form_valid(form)
 
 
-
-class ProductUpdateView(UpdateView):
+class ProductUpdateView(LoginRequiredMixin, UpdateView):
     model = Product
     form_class = ProductForm
     success_url = reverse_lazy('catalog:catalog')
@@ -80,7 +73,6 @@ class ProductUpdateView(UpdateView):
         return super().form_valid(form)
 
 
-
 def contacts(request):
     company_info = Contact.objects.all()
     info_content = {
@@ -93,7 +85,3 @@ def contacts(request):
         message = request.POST.get("message")
         print(f"{name} ({phone}): {message}")
     return render(request, "catalog/contacts.html", info_content)
-
-
-
-
