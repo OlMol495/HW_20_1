@@ -1,5 +1,5 @@
 {% extends 'catalog/base.html' %}
-
+{% load crispy_forms_tags %}
 {% block content %}
 
 <div class="col-12">
@@ -16,7 +16,7 @@
                     <div class="card-body">
 
                         {% csrf_token %}
-                        {{ form.as_p }}
+                        {% crispy form %}
                         <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
                     </div>
                     <div class="card-footer"></div>
