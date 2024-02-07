@@ -1,4 +1,6 @@
-Django
+Django==4.2
 psycopg2-binary
 pillow
 ipython
+django-crispy-forms
+crispy-bootstrap4
