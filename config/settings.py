@@ -12,6 +12,10 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 import os
 from pathlib import Path
 
+
+# env = environ.Env()
+# environ.Env.read_env()   #Reads the .env file
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -88,9 +92,9 @@ WSGI_APPLICATION = "config.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "onlinestore",
+        "NAME": "onlinestore1",
         "USER": "postgres",
-        "PASSWORD": "5758",
+        "PASSWORD": "5758" #env("POSTGRES_PASSWORD"),
     }
 }
 
@@ -146,9 +150,13 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'yesool.jeong@gmail.com'
-EMAIL_HOST_PASSWORD = 'oycaxmuwxfcqvtjr'
+EMAIL_HOST_USER = 'yesool.jeong@gmail.com'  #env('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = 'oycaxmuwxfcqvtjr'  #env("EMAIL_HOST_PASSWORD")
 EMAIL_USE_TLS = True
+
+#DEFAULT_FROM_EMAIL = #env('FROM_EMAIL', default='noreply@gmail.com')
+#LOGIN_REDIRECT_URL = 'success'
+
 # EMAIL_HOST= 'smtp.mail.ru'
 # EMAIL_HOST_USER= 'herowife@mail.ru'
 # EMAIL_HOST_PASSWORD= 'weERVmj4jfdn4HiH1KvH'
