@@ -1,0 +1,317 @@
+[
+  {
+    "model": "catalog.category",
+    "pk": 1,
+    "fields": {
+      "name": "Соки",
+      "description": "Длительного хранения"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 2,
+    "fields": {
+      "name": "Бакалея",
+      "description": "Длительного хранения"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 3,
+    "fields": {
+      "name": "Мясо",
+      "description": "Скоропортящееся"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 4,
+    "fields": {
+      "name": "Рыба",
+      "description": "Скоропортящееся"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 5,
+    "fields": {
+      "name": "Хлебобулочные изделия",
+      "description": "Средний срок хранения"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 6,
+    "fields": {
+      "name": "Фрукты",
+      "description": "Свежие фрукты без тепловой обработки"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 7,
+    "fields": {
+      "name": "Молочные продукты",
+      "description": "Скоропортящееся"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 1,
+    "fields": {
+      "name": "Мука ржаная",
+      "description": "Упаковка 1 кг",
+      "item_pic": "catalog/rye_flour_qIz3YqS.jpeg",
+      "category": 2,
+      "item_price": "100.00",
+      "created_date": "2024-02-01",
+      "last_edited_date": "2024-02-01",
+      "user": null
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 2,
+    "fields": {
+      "name": "Мука пшеничная",
+      "description": "Упаковка 1 кг",
+      "item_pic": "catalog/wheat_flour_bdghSxK.jpeg",
+      "category": 2,
+      "item_price": "90.00",
+      "created_date": "2024-02-01",
+      "last_edited_date": "2024-02-01",
+      "user": null
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 3,
+    "fields": {
+      "name": "Кефир",
+      "description": "Тетрапак 1 л",
+      "item_pic": "catalog/kefir_ywNeYRl.jpeg",
+      "category": 7,
+      "item_price": "149.00",
+      "created_date": "2024-02-01",
+      "last_edited_date": "2024-02-01",
+      "user": null
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 4,
+    "fields": {
+      "name": "Свиная вырезка",
+      "description": "Ваккуумная упаковка по 500 гр",
+      "item_pic": "catalog/pork_sirloin_o5jpB0P.jpeg",
+      "category": 3,
+      "item_price": "500.00",
+      "created_date": "2024-02-01",
+      "last_edited_date": "2024-02-01",
+      "user": null
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 5,
+    "fields": {
+      "name": "Яблочный сок",
+      "description": "Стекло, 500 мл",
+      "item_pic": "catalog/apple_juice_jJf101w.jpeg",
+      "category": 1,
+      "item_price": "120.00",
+      "created_date": "2024-02-01",
+      "last_edited_date": "2024-02-01",
+      "user": null
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 6,
+    "fields": {
+      "name": "Сметана",
+      "description": "250 гр",
+      "item_pic": "",
+      "category": 7,
+      "item_price": "80.00",
+      "created_date": "2024-02-01",
+      "last_edited_date": "2024-02-01",
+      "user": null
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 7,
+    "fields": {
+      "name": "Свиные ребра",
+      "description": "Ваккуумная упаковка по 1 кг",
+      "item_pic": "",
+      "category": 3,
+      "item_price": "1000.00",
+      "created_date": "2024-02-01",
+      "last_edited_date": "2024-02-01",
+      "user": null
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 8,
+    "fields": {
+      "name": "Томатный сок",
+      "description": "Стекло 750 мл",
+      "item_pic": "",
+      "category": 1,
+      "item_price": "90.00",
+      "created_date": "2024-02-01",
+      "last_edited_date": "2024-02-01",
+      "user": null
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 9,
+    "fields": {
+      "name": "Папайя",
+      "description": "Свежая, нарезка кубиком, упаковка 500 гр",
+      "item_pic": "catalog/papaya_pgn_hKb3POG.png",
+      "category": 6,
+      "item_price": "300.00",
+      "created_date": "2024-02-01",
+      "last_edited_date": "2024-02-01",
+      "user": null
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 10,
+    "fields": {
+      "name": "Папайя Ц",
+      "description": "Свежая, целиком, цена за 1 кг",
+      "item_pic": "catalog/papaya_pgn_Dcrc62A_f5PBHuJ.png",
+      "category": 6,
+      "item_price": "400.00",
+      "created_date": "2024-02-01",
+      "last_edited_date": "2024-02-01",
+      "user": null
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 11,
+    "fields": {
+      "name": "Сахарный песок",
+      "description": "Развесной по 1 кг",
+      "item_pic": "catalog/sugar_loose.png",
+      "category": 2,
+      "item_price": "99.00",
+      "created_date": "2024-02-01",
+      "last_edited_date": "2024-02-01",
+      "user": null
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 13,
+    "fields": {
+      "name": "Молоко топленое",
+      "description": "Простоквашино, 500 мл",
+      "item_pic": "catalog/milk_topl.png",
+      "category": 7,
+      "item_price": "145.00",
+      "created_date": "2024-02-01",
+      "last_edited_date": "2024-02-01",
+      "user": null
+    }
+  },
+  {
+    "model": "catalog.version",
+    "pk": 1,
+    "fields": {
+      "product": 10,
+      "version_number": "0001",
+      "name": "Вьетнам",
+      "is_active": false
+    }
+  },
+  {
+    "model": "catalog.version",
+    "pk": 2,
+    "fields": {
+      "product": 10,
+      "version_number": "0002",
+      "name": "Тайланд",
+      "is_active": true
+    }
+  },
+  {
+    "model": "catalog.version",
+    "pk": 3,
+    "fields": {
+      "product": 9,
+      "version_number": "0001",
+      "name": "Вьетнам",
+      "is_active": true
+    }
+  },
+  {
+    "model": "catalog.version",
+    "pk": 4,
+    "fields": {
+      "product": 2,
+      "version_number": "0001",
+      "name": "Краснодар",
+      "is_active": true
+    }
+  },
+  {
+    "model": "catalog.version",
+    "pk": 5,
+    "fields": {
+      "product": 6,
+      "version_number": "0001",
+      "name": "Беларусь",
+      "is_active": false
+    }
+  },
+  {
+    "model": "catalog.version",
+    "pk": 6,
+    "fields": {
+      "product": 6,
+      "version_number": "0002",
+      "name": "Литва",
+      "is_active": false
+    }
+  },
+  {
+    "model": "catalog.version",
+    "pk": 7,
+    "fields": {
+      "product": 6,
+      "version_number": "0003",
+      "name": "Краснодар",
+      "is_active": true
+    }
+  },
+  {
+    "model": "catalog.version",
+    "pk": 8,
+    "fields": {
+      "product": 3,
+      "version_number": "0001",
+      "name": "Москва",
+      "is_active": true
+    }
+  },
+  {
+    "model": "catalog.contact",
+    "pk": 1,
+    "fields": {
+      "name": "Best Goods Ever",
+      "phone": "+7 777 7777 7777",
+      "email": "bestgoodsever@mail.me",
+      "address": "77 Best st, Goods City, 77777, My Country",
+      "ind_number": "77 777 777 7777"
+    }
+  }
+]

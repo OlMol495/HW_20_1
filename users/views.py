@@ -1,3 +1,5 @@
+import random
+
 from django.contrib import messages
 from django.contrib.sites.shortcuts import get_current_site
 from django.shortcuts import redirect, render
@@ -28,7 +30,9 @@ def send_email_verify(request, user):
 class EmailVerifyView(View):
     def get(self, request, uidb64=None, token=None):
         user = self.get_user_by_uidb64(uidb64)
-        if user is not None and default_token_generator.check_token(user, token):
+        print(user)
+        print(user.token)
+        if user is not None and user.token == token:
             user.email_confirmed = True
             user.is_active = True
             user.save()
@@ -53,24 +57,21 @@ class RegisterView(CreateView):
     success_url = reverse_lazy('users:login')
 
     def form_valid(self, form):
-        self.object = form.save()
-        self.object.is_active = False
-        self.object.save()
-        self.send_email_verify(self.request, self.object)
+        user = form.save()
+        verify_token = default_token_generator.make_token(user)
+        user.token = verify_token
+        user.is_active = False
+        user.save()
+        self.send_email_verify(self.request, user, verify_token)
 
-        # send_mail(
-        #     subject='Поздравляем с регистрацией',
-        #     message=f'Вы успешно прошли регистрацию в BestStoreEver',
-        #     from_email=settings.EMAIL_HOST_USER,
-        #     recipient_list=[self.object.email]
-        # )
         return super().form_valid(form)
 
     @staticmethod
-    def send_email_verify(request, user):
+    def send_email_verify(request, user, token):
         current_site = get_current_site(request)
+        user.save()
         context = {"user": user, "domain": current_site.domain, "uid": urlsafe_base64_encode(force_bytes(user.pk)),
-                   "token": default_token_generator.make_token(user)}
+                   "token": token}
         message = render_to_string("users/email_verify.html", context)
         email = EmailMessage(subject="Verification", body=message, to=[user.email])
         email.send()

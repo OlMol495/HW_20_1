@@ -4,3 +4,4 @@ pillow
 ipython
 django-crispy-forms
 crispy-bootstrap4
+pytils
