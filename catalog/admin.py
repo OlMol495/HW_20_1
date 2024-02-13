@@ -5,8 +5,8 @@ from catalog.models import Product, Category, Contact, Version
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('pk', 'name', 'item_price', 'category',)
-    list_filter = ('category',)
+    list_display = ('pk', 'name', 'item_price', 'category', 'owner', 'is_published')
+    list_filter = ('category', 'is_published')
     search_fields = ('name', 'description',)
 
 
@@ -16,7 +16,7 @@ class CategoryAdmin(admin.ModelAdmin):
 
 
 @admin.register(Version)
-class VersiojAdmin(admin.ModelAdmin):
+class VersionAdmin(admin.ModelAdmin):
     list_display = ('name', 'version_number', 'product', 'is_active')
 
 

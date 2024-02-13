@@ -1,15 +1,19 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.db import transaction
 from django.forms import inlineformset_factory
+from django.http import Http404
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView
 
-from catalog.forms import ProductForm, VersionForm
+from catalog.forms import ProductForm, VersionForm, ModeratorProductForm
 from catalog.models import Product, Contact, Category, Version
 
 
 class HomeTemplateView(TemplateView):
+    """
+    Обработка запроса на отображение главной страницы
+    """
     template_name = 'catalog/home.html'
     extra_context = {'title': 'Best Store Ever'}
 
@@ -20,17 +24,26 @@ class HomeTemplateView(TemplateView):
 
 
 class ProductListView(ListView):
+    """
+    Обработка запросов на отображение списка товаров
+    """
     model = Product
     extra_context = {'title': 'Каталог продуктов'}
     paginate_by = 4
 
 
 class ProductDetailView(DetailView):
+    """
+    Обработка запросов для отображения информации по конкретному товару
+    """
     model = Product
     extra_context = {'title': 'Детальная информация о товаре'}
 
 
 class ProductCreateView(LoginRequiredMixin, CreateView):
+    """
+    Обработка запросов для создания товара
+    """
     model = Product
     form_class = ProductForm
     success_url = reverse_lazy('catalog:catalog')
@@ -44,6 +57,9 @@ class ProductCreateView(LoginRequiredMixin, CreateView):
 
 
 class ProductUpdateView(LoginRequiredMixin, UpdateView):
+    """
+    Обработка запросов для редактирования товара
+    """
     model = Product
     form_class = ProductForm
     success_url = reverse_lazy('catalog:catalog')
@@ -71,6 +87,17 @@ class ProductUpdateView(LoginRequiredMixin, UpdateView):
                     return self.form_invalid(form)
 
         return super().form_valid(form)
+
+    def get_form_class(self):
+        """
+        Проверка прав пользователя на редактирования товара
+        """
+        if self.request.user == self.object.owner:
+            return ProductForm
+        elif self.request.user.groups.filter(name='moderator'):
+            return ModeratorProductForm
+        else:
+            raise Http404('Только владелец товара может вносить изменения')
 
 
 def contacts(request):
