@@ -32,6 +32,7 @@
             <div class="col-6">
                 <div class="card">
                     {% if object %}
+                        {% if user.is_owner or user.is_superuser %}
                     <div class="card-header">
                         <h1>Версия продукта</h1>
                     </div>
@@ -46,6 +47,7 @@
                             {% endfor %}
                         </div>
                     </div>
+                            {% endif %}
                     {% endif %}
                 </div>
             </div>

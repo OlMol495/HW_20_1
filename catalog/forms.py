@@ -45,3 +45,8 @@ class VersionForm(StyleFormMixin, forms.ModelForm):
         model = Version
         exclude = ('product',)
 
+
+class ModeratorProductForm(ProductForm):
+    class Meta:
+        model = Product
+        fields = ('description', 'category', 'is_published')

@@ -29,7 +29,8 @@ class Product(models.Model):
     item_price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='Цена за единицу товара')
     created_date = models.DateField(auto_now_add=True, verbose_name='Дата внесения товара в базу', **NULLABLE)
     last_edited_date = models.DateField(auto_now=True, verbose_name='Дата последнего изменения', **NULLABLE)
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, **NULLABLE, verbose_name='автор записи')
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, **NULLABLE, verbose_name='Автор записи')
+    is_published = models.BooleanField(default=False, verbose_name='Опубликовано')
 
     def __str__(self):
         # Строковое отображение объекта
@@ -39,6 +40,11 @@ class Product(models.Model):
         verbose_name = 'товар'  # Настройка для наименования одного объекта
         verbose_name_plural = 'товары'  # Настройка для наименования набора объектов
         ordering = ('-last_edited_date', 'name',)
+        permissions = [
+            ('change_published_status', 'Can change published'),
+            ('change_product_description', 'Can change product description'),
+            ('change_product_category', 'Can change product category')
+        ]
 
 
 class Version(models.Model):

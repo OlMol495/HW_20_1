@@ -11,6 +11,7 @@
             <a class="btn btn-outline-primary" href="{% url 'catalog:product_create' %}">Добавить продукт</a>
         </div>
         {% for object in object_list %}
+            {% if object.is_published or user.is_superuser or user.is_staff or user.is_owner %}
         <div class="col-3">
             <div class="card mb-4 box-shadow">
                 <div class="card-header">
@@ -36,6 +37,7 @@
                 </div>
             </div>
         </div>
+            {% endif %}
         {% endfor %}
     </div>
 </div>
