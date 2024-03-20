@@ -8,6 +8,7 @@ from django.views.generic import TemplateView, ListView, DetailView, CreateView,
 
 from catalog.forms import ProductForm, VersionForm, ModeratorProductForm
 from catalog.models import Product, Contact, Category, Version
+from catalog.services import get_cached_category
 
 
 class HomeTemplateView(TemplateView):
@@ -98,6 +99,16 @@ class ProductUpdateView(LoginRequiredMixin, UpdateView):
             return ModeratorProductForm
         else:
             raise Http404('Только владелец товара может вносить изменения')
+
+
+class CategoryListView(LoginRequiredMixin, ListView):
+        model = Category
+
+        def get_context_data(self, **kwargs):
+            context_data = super().get_context_data(**kwargs)
+            context_data['title'] = 'Категории Товаров'
+            context_data['object_list'] = get_cached_category()
+            return context_data
 
 
 def contacts(request):
